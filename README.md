@@ -18,6 +18,6 @@ Then you will enter the tetris container.
 
 run game:
 ```
-# game
+$ game
 ```
 Thats all
