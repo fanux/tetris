@@ -21,3 +21,9 @@ run game:
 $ game
 ```
 Thats all
+
+Alternative:
+```
+$ docker run -it fanux/tetris:latest
+# game
+```
