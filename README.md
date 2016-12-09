@@ -1,4 +1,4 @@
-## Your star is my power :rocket:
+## Your star is my power :rocket: :star: :star: :star: :star: :star:
 ![](https://github.com/fanux/tetris/blob/master/img/tetris.png?raw=true)
 ## Build
 ```
