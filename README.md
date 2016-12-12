@@ -27,3 +27,5 @@ Alternative:
 $ docker run -it fanux/tetris:latest
 # game
 ```
+
+Play well in iTerm
