@@ -12,7 +12,7 @@ Linux docker-86-106 3.10.0-327.22.2.el7.x86_64 #1 SMP Thu Jun 23 17:05:11 UTC 20
 ## Ship on docker
 ```
 $ docker build -t tetris:latest .
-$ docker run -it tetris:latest
+$ docker run -it tetris:latest /bin/bash
 ```
 Then you will enter the tetris container.
 
@@ -24,7 +24,7 @@ Thats all
 
 Alternative:
 ```
-$ docker run -it fanux/tetris:latest
+$ docker run -it fanux/tetris:latest /bin/bash
 # game
 ```
 
