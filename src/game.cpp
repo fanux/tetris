@@ -14,7 +14,7 @@ pthread_mutex_t	mutex_lock;/////////////////////////////////////////////////////
 int num = 0;
 
 static int stop_flag;
-//ÎªÁËÖ»µ÷ÓÃsrandº¯ÊýÒ»´Î£¬ÕâÑùÊ±¼äÏà½ü²úÉúµÄËæ»úÊý¾Í²»»áÖØ¸´
+//Îªï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½srandï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½
 static Rand r;
 
 /////////////////////////////////////////////
@@ -31,7 +31,7 @@ c.saveCur();
    cout<<"next : ";
    c.resumeCur();
 
-    int a[3][3] = {0};  //»ñÈ¡·½¿éÊý×é
+    int a[3][3] = {0};  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     memcpy(a,graph->getArray(),CUBE_SIZE);
     for(i = x; i < x+3; i++)
         for(j = y; j < y+3; j++)
@@ -144,7 +144,7 @@ Game::Game()
         m_penal[23][i] = 1;
         m_penal[0][i] = 1;
    }
-   /*²âÊÔÃæ°åÖµÊÇ·ñÕý³£
+   /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
    for(i = 0; i < 24; i++)
    {
         for(int j = 0; j < 17; j++)
@@ -176,7 +176,7 @@ char Game::getShape()
 bool Game::erasePenal()
 {
     int i,j;
-    int b[3][3] = {0};  //»ñÈ¡·½¿éÊý×é
+    int b[3][3] = {0};  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     m_graph->printG(CLEAR);
     memcpy(b,m_graph->getArray(),CUBE_SIZE);
@@ -192,7 +192,7 @@ bool Game::erasePenal()
 bool Game::recoverPenal()
 {
     int i,j;
-    int b[3][3] = {0};  //»ñÈ¡·½¿éÊý×é
+    int b[3][3] = {0};  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     memcpy(b,m_graph->getArray(),CUBE_SIZE);
     for(i = x; i < x + 3; i++)
@@ -208,11 +208,11 @@ bool Game::recoverPenal()
 bool Game::setPenal()
 {
     int i,j;
-    int b[3][3] = {0};  //»ñÈ¡·½¿éÊý×é
+    int b[3][3] = {0};  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     m_graph->getLocate(&x,&y);
     memcpy(b,m_graph->getArray(),CUBE_SIZE);
-    /*²âÊÔÈ¡µ½·½¿éÊý×éÊÇ·ñÕý³£
+    /*ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
     for(i = 0;i < 3; i++)
     {
         for(j = 0; j < 3; j++)
@@ -227,7 +227,7 @@ bool Game::setPenal()
             if(m_penal[i][j] > 1)
             {
                 cout<<"game over"<<endl;
-                //¼Ó·ÖÊýÍ³¼ÆÅÅÐÐ°ñµÈ
+                //ï¿½Ó·ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½ï¿½
                 system("stty icanon echo");
                 exit(0);
             }
@@ -313,22 +313,22 @@ pthread_mutex_unlock(&mutex_lock);/////////////////////////////////////
 }
 void Game::roll()
 {
-    //È¡³ö·½¿éµÄÖµ£¬ÏÈ·Åµ½Ò»¸öÊý×éÖÐ
+    //È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½È·Åµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int i,j;
     int flag = 0;
-    int b[3][3] = {0};  //»ñÈ¡·½¿éÊý×é
+    int b[3][3] = {0};  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int temp[3][3] = {0};
 
     m_graph->getLocate(&x,&y);
     memcpy(b,m_graph->getArray(),CUBE_SIZE);
     erasePenal();
-    //Ðý×ªÊý×é
+    //ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
     for(i = 0; i < 3; i++)
         for(j = 0; j < 3; j++)
         {
             temp[2-j][i] = b[i][j];
         }
-    //ÅÐ¶ÏÐý×ªºóÊÇ·ñ»áÓëÃæ°åÖØºÏ
+    //ï¿½Ð¶ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½
     for(i = 0; i < 3; i++)
     {
         for(j = 0; j < 3; j++)
@@ -342,7 +342,7 @@ void Game::roll()
         if(flag == 1)
             break;
     }
-    //Èç¹û²»ÖØºÏÔòÐý×ª·½¿é£¬ÉèÖÃÃæ°åµÄÖµ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
     if(flag == 0)
     {
         m_graph->roll();
@@ -362,7 +362,7 @@ bool Game::isAttachBottom()
 {
     int i,j;
     int cube_x,cube_y;
-    int b[3][3] = {0};  //»ñÈ¡·½¿éÊý×é
+    int b[3][3] = {0};  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int flag = false;
 
     m_graph->getLocate(&cube_x,&cube_y);
@@ -387,7 +387,7 @@ bool Game::isAttachLeft()
 {
     int i,j;
     int cube_x,cube_y;
-    int b[3][3] = {0};  //»ñÈ¡·½¿éÊý×é
+    int b[3][3] = {0};  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int flag = false;
 
     m_graph->getLocate(&cube_x,&cube_y);
@@ -413,7 +413,7 @@ bool Game::isAttachRight()
 {
     int i,j;
     int cube_x,cube_y;
-    int b[3][3] = {0};  //»ñÈ¡·½¿éÊý×é
+    int b[3][3] = {0};  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int flag = false;
 
     m_graph->getLocate(&cube_x,&cube_y);
@@ -450,12 +450,12 @@ void Game::erase()
         }
         if(flag == 0)
         {
-            //¼Ó·Ö£¡
+            //ï¿½Ó·Ö£ï¿½
             count++;
             s.setScore(count);
             s.printMessage();
 
-            //¸ÃÐÐÉÏÃæµÄÍ¼ÐÎÕûÌå×øÂä
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             down(i);
             i++;
         }
@@ -472,7 +472,7 @@ void Game::down(int level)
         {
             m_penal[i][j] = m_penal[i - 1][j];
         }
-    //Ë¢ÐÂÃæ°å
+    //Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½
     CubePoint p;
     for(i = 1; i < 23; i++)
         for(j = 1; j < 16; j++)
@@ -510,11 +510,29 @@ void* listenKey(void *ptr)
             case 'w':
                 ptrg->roll();break;
             case 's':
-                //ËÙ½µ
+                //ï¿½Ù½ï¿½
                 while(1)
                 {
                     if(stop_flag == 1)
                     {
+                        stop_flag = 0;
+                        break;
+                    }
+                    ptrg->move(DOWN);
+                }
+                break;
+            case 68:
+                ptrg->move(LEFT);
+                break;
+            case 67:
+                ptrg->move(RIGHT);
+                break;
+            case 65:
+                ptrg->roll();
+                break;
+            case 66:
+                while (1) {
+                    if (stop_flag == 1) {
                         stop_flag = 0;
                         break;
                     }
