@@ -14,7 +14,7 @@ pthread_mutex_t	mutex_lock;/////////////////////////////////////////////////////
 int num = 0;
 
 static int stop_flag;
-//Ϊ��ֻ����srand����һ�Σ�����ʱ�����������������Ͳ����ظ�
+//为了只调用srand函数一次，这样时间相近产生的随机数就不会重复
 static Rand r;
 
 /////////////////////////////////////////////
@@ -31,7 +31,7 @@ c.saveCur();
    cout<<"next : ";
    c.resumeCur();
 
-    int a[3][3] = {0};  //��ȡ��������
+    int a[3][3] = {0};  //获取方块数组
     memcpy(a,graph->getArray(),CUBE_SIZE);
     for(i = x; i < x+3; i++)
         for(j = y; j < y+3; j++)
@@ -144,7 +144,7 @@ Game::Game()
         m_penal[23][i] = 1;
         m_penal[0][i] = 1;
    }
-   /*�������ֵ�Ƿ�����
+   /*测试面板值是否正常
    for(i = 0; i < 24; i++)
    {
         for(int j = 0; j < 17; j++)
@@ -176,7 +176,7 @@ char Game::getShape()
 bool Game::erasePenal()
 {
     int i,j;
-    int b[3][3] = {0};  //��ȡ��������
+    int b[3][3] = {0}; //获取方块数组
 
     m_graph->printG(CLEAR);
     memcpy(b,m_graph->getArray(),CUBE_SIZE);
@@ -192,7 +192,7 @@ bool Game::erasePenal()
 bool Game::recoverPenal()
 {
     int i,j;
-    int b[3][3] = {0};  //��ȡ��������
+    int b[3][3] = {0}; //获取方块数组
 
     memcpy(b,m_graph->getArray(),CUBE_SIZE);
     for(i = x; i < x + 3; i++)
@@ -208,11 +208,11 @@ bool Game::recoverPenal()
 bool Game::setPenal()
 {
     int i,j;
-    int b[3][3] = {0};  //��ȡ��������
+    int b[3][3] = {0}; //获取方块数组
 
     m_graph->getLocate(&x,&y);
     memcpy(b,m_graph->getArray(),CUBE_SIZE);
-    /*����ȡ�����������Ƿ�����
+    /*测试取到方块数组是否正常
     for(i = 0;i < 3; i++)
     {
         for(j = 0; j < 3; j++)
@@ -227,7 +227,7 @@ bool Game::setPenal()
             if(m_penal[i][j] > 1)
             {
                 cout<<"game over"<<endl;
-                //�ӷ���ͳ�����а��
+                //加分数统计排行榜等
                 system("stty icanon echo");
                 exit(0);
             }
@@ -313,22 +313,22 @@ pthread_mutex_unlock(&mutex_lock);/////////////////////////////////////
 }
 void Game::roll()
 {
-    //ȡ�������ֵ���ȷŵ�һ��������
+    //取出方块的值，先放到一个数组中
     int i,j;
     int flag = 0;
-    int b[3][3] = {0};  //��ȡ��������
+    int b[3][3] = {0}; //获取方块数组
     int temp[3][3] = {0};
 
     m_graph->getLocate(&x,&y);
     memcpy(b,m_graph->getArray(),CUBE_SIZE);
     erasePenal();
-    //��ת����
+    //旋转数组
     for(i = 0; i < 3; i++)
         for(j = 0; j < 3; j++)
         {
             temp[2-j][i] = b[i][j];
         }
-    //�ж���ת���Ƿ��������غ�
+    //判断旋转后是否会与面板重合
     for(i = 0; i < 3; i++)
     {
         for(j = 0; j < 3; j++)
@@ -342,7 +342,7 @@ void Game::roll()
         if(flag == 1)
             break;
     }
-    //������غ�����ת���飬��������ֵ
+    //如果不重合则旋转方块，设置面板的值
     if(flag == 0)
     {
         m_graph->roll();
@@ -362,7 +362,7 @@ bool Game::isAttachBottom()
 {
     int i,j;
     int cube_x,cube_y;
-    int b[3][3] = {0};  //��ȡ��������
+    int b[3][3] = {0};  //获取方块数组
     int flag = false;
 
     m_graph->getLocate(&cube_x,&cube_y);
@@ -387,7 +387,7 @@ bool Game::isAttachLeft()
 {
     int i,j;
     int cube_x,cube_y;
-    int b[3][3] = {0};  //��ȡ��������
+    int b[3][3] = {0}; //获取方块数组
     int flag = false;
 
     m_graph->getLocate(&cube_x,&cube_y);
@@ -413,7 +413,7 @@ bool Game::isAttachRight()
 {
     int i,j;
     int cube_x,cube_y;
-    int b[3][3] = {0};  //��ȡ��������
+    int b[3][3] = {0}; //获取方块数组
     int flag = false;
 
     m_graph->getLocate(&cube_x,&cube_y);
@@ -450,12 +450,12 @@ void Game::erase()
         }
         if(flag == 0)
         {
-            //�ӷ֣�
+            //加分！
             count++;
             s.setScore(count);
             s.printMessage();
 
-            //���������ͼ����������
+            //该行上面的图形整体坐落
             down(i);
             i++;
         }
@@ -472,7 +472,7 @@ void Game::down(int level)
         {
             m_penal[i][j] = m_penal[i - 1][j];
         }
-    //ˢ�����
+    //刷新面板
     CubePoint p;
     for(i = 1; i < 23; i++)
         for(j = 1; j < 16; j++)
@@ -510,7 +510,7 @@ void* listenKey(void *ptr)
             case 'w':
                 ptrg->roll();break;
             case 's':
-                //�ٽ�
+                //速降
                 while(1)
                 {
                     if(stop_flag == 1)
